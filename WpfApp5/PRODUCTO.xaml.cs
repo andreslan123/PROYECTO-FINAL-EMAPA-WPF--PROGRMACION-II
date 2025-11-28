@@ -21,7 +21,7 @@ namespace WpfApp5
     public partial class PRODUCTO : Window
     {
         public ObservableCollection<Producto> lstProducto { get; set; } = new ObservableCollection<Producto>();
-        private string rutaArchivoTxt = "C:\\Users\\Alumno\\Escritorio\\WpfApp5\\WpfApp5\\listaProductos\\Productos.txt";
+        public string rutaArchivoTxt = "C:\Users\Alumno\Escritorio\proyecto emapa\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\DatosUsuario\dato";
         public PRODUCTO()
         {
             InitializeComponent();
@@ -30,20 +30,35 @@ namespace WpfApp5
         }
         private int idProd = 1000;
 
-        private void btnAgregarProducto_Click(object sender, RoutedEventArgs e)
+        private void btnAgregarProducto_Click_1(object sender, RoutedEventArgs e)
+
         {
-            if (txtnProductoIngresado.Text == "")
+
+            if (string.IsNullOrWhiteSpace(txtnProductoIngresado.Text))
+
             {
-                MessageBox.Show("debe ingresar el nombre de un Producto para agregar lo..");
-                return; 
+
+                MessageBox.Show("Debe ingresar el nombre de un Producto para agregarlo.");
+
+                return;
+
             }
 
-            Producto pro = new Producto(idProd, txtnProductoIngresado.Text);
-            idProd++;
-            lstProducto.Add(pro);
-            txtnProductoIngresado.Clear();
-        }
+            int cantidad = 0;
 
+            double precio = 0.0;
+
+            string fecha = "";
+
+            Producto pro = new Producto(idProd, txtnProductoIngresado.Text, cantidad, precio, fecha);
+
+            idProd++;
+
+            lstProducto.Add(pro);
+
+            txtnProductoIngresado.Clear();
+
+        }
 
 
     }
