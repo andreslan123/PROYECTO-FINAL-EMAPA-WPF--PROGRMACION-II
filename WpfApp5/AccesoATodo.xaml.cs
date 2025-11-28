@@ -36,7 +36,18 @@ namespace WpfApp5
 
         private void btnProducto_Click(object sender, RoutedEventArgs e)
         {
-            
+            PRODUCTO pro = new PRODUCTO();
+            pro.Show();
+            this.Close();
+        }
+
+        private void btnEmpleado_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCliente_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

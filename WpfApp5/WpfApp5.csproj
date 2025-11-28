@@ -61,6 +61,10 @@
     <Compile Include="Bienvenida.xaml.cs">
       <DependentUpon>Bienvenida.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EMPLEADO.xaml.cs">
+      <DependentUpon>EMPLEADO.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmpleadoOperario.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="PRODUCTO.xaml.cs">
       <DependentUpon>PRODUCTO.xaml</DependentUpon>
@@ -73,6 +77,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Bienvenida.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EMPLEADO.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
