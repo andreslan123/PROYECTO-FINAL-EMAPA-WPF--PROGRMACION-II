@@ -1,0 +1,123 @@
+﻿<Window x:Class="WpfApp5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="500"
+        Icon="/imagenes/Logotipo.png">
+    <Grid>
+        <!--Fondo de Pantalla-->
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/fondo_emapa.jpg"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--USUARIO-->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="20"
+                    >
+            <Label x:Name="lblUsuario"
+                   FontWeight="Bold"
+                   Content="USUARIO:"
+                   FontSize="20"
+                   Foreground="White"
+                   VerticalAlignment="Center">
+
+            </Label>
+            <TextBox x:Name="txtUsuario"
+                     FontSize="20"
+                     Width="250"
+                     Margin="15"
+                     VerticalAlignment="Center" 
+                     PreviewTextInput="txtUsuario_TextChanged">
+
+            </TextBox>
+        </StackPanel>
+
+        <!--CONTRASEÑA-->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="20"
+                    >
+            <Label x:Name="lblContraseña"
+                   FontWeight="Bold"
+                   Content="CONTRASEÑA:"
+                   FontSize="20"
+                   Foreground="White"
+                   VerticalAlignment="Center">
+
+            </Label>
+            <PasswordBox x:Name="PwContraseña"
+                           FontSize="20"
+                           Width="200"
+                           Margin="15"
+                           VerticalAlignment="Center">
+
+            </PasswordBox>
+        </StackPanel>
+
+        <!--MENSAJE DE ADVERTENCIA-->
+        <Label x:Name="lblMensaje"
+                   FontWeight="Bold"
+                   FontSize="20"
+                   Grid.Row="3"
+                   Foreground="Orange"
+                   HorizontalAlignment="Right">
+        </Label>
+
+        <!--BOTONES-->
+        <StackPanel Grid.Row="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="2"
+                    Orientation="Horizontal">
+            <Button x:Name="btnIngresar"
+                    Margin="20"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="INGRESAR"
+                    Width="150"
+                    Height="40"
+                    FontSize="18"
+                    Background="Orange"
+                    Opacity="0.5" Click="btnIngresar_Click_1">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+            <Button x:Name="btnCrear"
+                    Margin="20"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="CREAR CUENTA"
+                    Width="150"
+                    Height="40"
+                    FontSize="18"
+                    Background="Green"
+                    Opacity="0.8" Click="btnCrear_Click_2">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

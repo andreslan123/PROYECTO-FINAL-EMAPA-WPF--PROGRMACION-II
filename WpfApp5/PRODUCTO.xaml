@@ -1,0 +1,208 @@
+﻿<Window x:Class="WpfApp5.PRODUCTO"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5"
+        mc:Ignorable="d"
+        Title="PRODUCTO" Height="500" Width="600">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/fondoAzul.jpg"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="lblTItulo"
+               FontSize="30"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="PRODUCTO"
+               Foreground="White">
+        </Label>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="5"
+                    Grid.Row="1">
+            <Label x:Name="lblNombreProducto"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="NOMBRE DEL PRODUCTO: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtnNombreProducto"
+                     Margin="5"
+                     Width="200"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
+
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="5"
+                    Grid.Row="2">
+            <Label x:Name="lblIngresarProducto"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="INGRESAR PRODUCTO: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtnProductoIngresado"
+                     Margin="5"
+                     Width="200"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
+             <Label x:Name="lblCantidad"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="CANTIDAD: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtCantidad"
+                     Margin="5"
+                     Width="85"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="5"
+                    Grid.Row="3">
+            <Label x:Name="lblPrecio"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="PRECIO: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtPrecio"
+                     Margin="5"
+                     Width="150"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
+            <Label x:Name="lblFecha"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="FECHA: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtFecha"
+                     Margin="5"
+                     Width="150"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
+        </StackPanel>
+
+        <DataGrid x:Name="dgProducto"
+              Grid.Row="4"
+              AutoGenerateColumns="False"
+              Margin="5"
+              Opacity="0.7">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID " 
+                                    Binding="{Binding IdProd}" 
+                                    Width="60"/>
+                <DataGridTextColumn Header="Nombre del producto" 
+                                    Binding="{Binding Nombre}" 
+                                    Width="150"/>
+                <DataGridTextColumn Header="Cantidad" 
+                                    Binding="{Binding Cantidad}" 
+                                    Width="70"/>
+                <DataGridTextColumn Header="PRECIO" 
+                                    Binding="{Binding IdCli}" 
+                                    Width="80"/>
+                <DataGridTextColumn Header="FECHA" 
+                                    Binding="{Binding Nombre}" 
+                                    Width="80"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="5"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <Button x:Name="btnSalir"
+                
+                    Margin="20"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="SALIR"
+                    Width="120"
+                    Height="30"
+                    FontSize="20"
+                    Background="Orange"
+                    Opacity="0.5">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+            <Button x:Name="btnVolver"
+                
+                    Margin="20"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="VOLVER"
+                    Width="120"
+                    Height="30"
+                    FontSize="20"
+                    Background="Green"
+                    Opacity="0.5">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+            <Button x:Name="btnAgregarProducto"
+                
+                    Margin="20"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="Agregar"
+                    Width="120"
+                    Height="30"
+                    FontSize="20"
+                    Background="Aquamarine"
+                    Opacity="0.5">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+
+        </StackPanel>
+        
+
+
+
+    </Grid>
+</Window>
