@@ -190,7 +190,7 @@
                     Height="30"
                     FontSize="20"
                     Background="Aquamarine"
-                    Opacity="0.5">
+                    Opacity="0.5" Click="btnAgregarProducto_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"></Setter>

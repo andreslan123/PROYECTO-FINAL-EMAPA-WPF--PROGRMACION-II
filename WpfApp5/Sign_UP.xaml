@@ -22,7 +22,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
 
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="2"
@@ -166,9 +166,9 @@
                          Width="200"
                          Margin="8"
                          VerticalContentAlignment="Center">
-                
+
             </PasswordBox>
-          
+
         </StackPanel>
         <Label x:Name="lblMensajes"
                   Grid.Row="9"
@@ -179,49 +179,53 @@
                   FontWeight="Bold"
                   Foreground="Red"/>
         <StackPanel Grid.Row="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal"
-                    >
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal"
+            Margin="8">
+
+            <!-- BOTON ACEPTAR -->
             <Button x:Name="btnAceptar"
-                Grid.Row="9"
-                Background="Orange"
-                Opacity="0.8"             
-                Foreground="DarkBlue" Click="btnAceptar_Click">
+            Margin="20"
+            Width="200"
+            Height="60"
+            FontSize="30"
+            FontWeight="Bold"
+            Content="ACEPTAR"
+            Background="Orange"
+            Foreground="Black"
+            Opacity="0.5"
+            Click="btnAceptar_Click">
+
+                <!-- Borde redondeado -->
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="20"/>
+                        <Setter Property="CornerRadius" Value="15"/>
                     </Style>
                 </Button.Resources>
-                <Grid>
-                    <TextBlock Text="Aceptar"
-                   HorizontalAlignment="Center"
-                   Width="200"
-                   FontSize="45"
-                   FontWeight="Bold"
-                   Margin="20,-16,-12,-5"/>
-                </Grid>
             </Button>
+
+            <!-- BOTON LIMPIAR -->
             <Button x:Name="btnLimpiar"
-                Grid.Row="9"
-                Background="Red"
-                Opacity="0.8"             
-                Foreground="DarkBlue" Click="btnLimpiar_Click">
+            Margin="20"
+            Width="200"
+            Height="60"
+            FontSize="30"
+            FontWeight="Bold"
+            Content="LIMPIAR"
+            Background="Red"
+            Foreground="Black"
+            Opacity="0.5"
+            Click="btnLimpiar_Click">
+
+                <!-- Borde redondeado -->
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="20"/>
+                        <Setter Property="CornerRadius" Value="15"/>
                     </Style>
                 </Button.Resources>
-                <Grid>
-                    <TextBlock Text="Limpiar"
-                   HorizontalAlignment="Center"
-                    Width="200"
-                   FontSize="38"
-                   FontWeight="Bold"
-                   Margin="20,-16,-48,-5"/>
-                </Grid>
             </Button>
-            
+
         </StackPanel>
 
     </Grid>

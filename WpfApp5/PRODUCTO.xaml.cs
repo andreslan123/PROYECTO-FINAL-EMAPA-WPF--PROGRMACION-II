@@ -21,7 +21,7 @@ namespace WpfApp5
     public partial class PRODUCTO : Window
     {
         public ObservableCollection<Producto> lstProducto { get; set; } = new ObservableCollection<Producto>();
-        public string rutaArchivoTxt = "C:\Users\Alumno\Escritorio\proyecto emapa\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\DatosUsuario\dato";
+        public string rutaArchivoTxt = "C:\\Users\\Santivañez\\Desktop\\Proyecto Final Program II\\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\\WpfApp5\\DatosUsuario\\datos.txt";
         public PRODUCTO()
         {
             InitializeComponent();
@@ -30,10 +30,8 @@ namespace WpfApp5
         }
         private int idProd = 1000;
 
-        private void btnAgregarProducto_Click_1(object sender, RoutedEventArgs e)
-
+        private void btnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(txtnProductoIngresado.Text))
 
             {
@@ -57,9 +55,6 @@ namespace WpfApp5
             lstProducto.Add(pro);
 
             txtnProductoIngresado.Clear();
-
         }
-
-
     }
 }

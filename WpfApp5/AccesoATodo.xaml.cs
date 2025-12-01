@@ -31,12 +31,23 @@ namespace WpfApp5
 
         private void btnCerrarPrincipal_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow main = new MainWindow();
+            main.Show();
             this.Close();
         }
 
         private void btnProducto_Click(object sender, RoutedEventArgs e)
         {
-            
+            PRODUCTO pro = new PRODUCTO();
+            pro.Show();
+            this.Close();
+        }
+
+        private void btnLote_Click(object sender, RoutedEventArgs e)
+        {
+            LOTE lot = new LOTE();
+            lot.Show();
+            this.Close();
         }
     }
 }

@@ -80,5 +80,9 @@ namespace WpfApp5
 
         }
 
+        private void dgClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

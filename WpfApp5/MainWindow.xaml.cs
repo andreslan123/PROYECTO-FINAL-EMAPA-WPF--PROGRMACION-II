@@ -22,7 +22,7 @@ namespace WpfApp5
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly string rutaYnombreArch = @"C:\Users\Alumno\Escritorio\WpfApp5\WpfApp5\DatosUsuario\datos.txt";
+        private readonly string rutaYnombreArch = "C:\\Users\\Santivañez\\Desktop\\Proyecto Final Program II\\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\\WpfApp5\\DatosUsuario\\datos.txt";
         public MainWindow()
         {
             InitializeComponent();

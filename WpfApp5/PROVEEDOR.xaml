@@ -8,7 +8,7 @@
         Title="PROVEEDOR"  Height="500" Width="700">
     <Grid Margin="10">
         <Grid.Background>
-            <ImageBrush ImageSource="/imagenes/emapa12.png"/>
+            <ImageBrush ImageSource="/imagenes/fondoAzul.jpg"/>
 
         </Grid.Background>
 
@@ -28,14 +28,16 @@
         <Label Content="REGISTRO DE PROVEEDORES"
             FontSize="28" FontWeight="Bold"
             HorizontalAlignment="Center"
-            Margin="0,0,0,20"/>
+            Margin="0,0,0,20"
+            Foreground="White"/>
 
         <StackPanel Grid.Row="1" Margin="10">
 
             <StackPanel Orientation="Horizontal"
                         Margin="0,5">
                 <Label Content="Nombre:" 
-                       Width="100"/>
+                       Width="100"
+                       Foreground="White"/>
                 <TextBox x:Name="txtNombre"
                          Width="250" />
             </StackPanel>
@@ -43,7 +45,8 @@
             <StackPanel Orientation="Horizontal"
                         Margin="0,5">
                 <Label Content="CI:"
-                       Width="100"/>
+                       Width="100"
+                       Foreground="White"/>
                 <TextBox x:Name="txtCI" 
                          Width="150" />
             </StackPanel>
@@ -64,7 +67,7 @@
         <DataGrid x:Name="dgClientes"
                Grid.Row="2"
                AutoGenerateColumns="False"
-               Margin="0,5">
+               Margin="0,5" SelectionChanged="dgClientes_SelectionChanged">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding IdProv}" Width="50"/>
