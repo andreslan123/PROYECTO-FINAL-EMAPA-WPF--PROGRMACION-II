@@ -1,0 +1,81 @@
+﻿<Window x:Class="WpfApp5.PROVEEDOR"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5"
+        mc:Ignorable="d"
+        Title="PROVEEDOR"  Height="500" Width="700">
+    <Grid Margin="10">
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/fondoAzul.jpg"/>
+
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="200"/>
+
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="200"/>
+
+        </Grid.RowDefinitions>
+
+        <Label Content="REGISTRO DE PROVEEDORES"
+            FontSize="28" FontWeight="Bold"
+            HorizontalAlignment="Center"
+            Margin="0,0,0,20"
+            Foreground="White"/>
+
+        <StackPanel Grid.Row="1" Margin="10">
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,5">
+                <Label Content="Nombre:" 
+                       Width="100"
+                       Foreground="White"/>
+                <TextBox x:Name="txtNombre"
+                         Width="250" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,5">
+                <Label Content="CI:"
+                       Width="100"
+                       Foreground="White"/>
+                <TextBox x:Name="txtCI" 
+                         Width="150" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" 
+                        Margin="0,10">
+                <Button x:Name="btnAgregarProveedor"
+                        Content="Agregar Proveedor"
+                        Width="150" Margin="5"
+                        Click="btnAgregarProveedor_Click"/>
+                <Button x:Name="btnEliminarProveedor"
+                        Content="Eliminar Proveedor"
+                        Width="150" Margin="5"
+                        Click="btnEliminarProveedor_Click"/>
+            </StackPanel>
+
+        </StackPanel>
+        <DataGrid x:Name="dgClientes"
+               Grid.Row="2"
+               AutoGenerateColumns="False"
+               Margin="0,5" SelectionChanged="dgClientes_SelectionChanged">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding IdProv}" Width="50"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding NomProv}" Width="200"/>
+                <DataGridTextColumn Header="CI" Binding="{Binding CiProv}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        
+    </Grid>
+</Window>
