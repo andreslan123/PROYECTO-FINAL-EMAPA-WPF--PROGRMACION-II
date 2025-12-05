@@ -65,12 +65,22 @@
       <DependentUpon>EMPLEADO.xaml</DependentUpon>
     </Compile>
     <Compile Include="EmpleadoOperario.cs" />
+    <Compile Include="LOTE.xaml.cs">
+      <DependentUpon>LOTE.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Producto.cs" />
     <Compile Include="PRODUCTO.xaml.cs">
       <DependentUpon>PRODUCTO.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Proveedor.cs" />
+    <Compile Include="PROVEEDOR.xaml.cs">
+      <DependentUpon>PROVEEDOR.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sign_UP.xaml.cs">
       <DependentUpon>Sign_UP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TRAMITE.xaml.cs">
+      <DependentUpon>TRAMITE.xaml</DependentUpon>
     </Compile>
     <Page Include="AccesoATodo.xaml">
       <SubType>Designer</SubType>
@@ -83,6 +93,10 @@
     <Page Include="EMPLEADO.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LOTE.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,7 +114,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PROVEEDOR.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Sign_UP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TRAMITE.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

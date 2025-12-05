@@ -21,7 +21,7 @@ namespace WpfApp5
     public partial class Empleado : Window
     {
         public ObservableCollection<EmpleadoOperario> lstEmpleado { get; set; } = new ObservableCollection<EmpleadoOperario>();
-        private string rutaArchivoTxt = "C:\\Users\\Alumno\\Escritorio\\Proyecto_Final_Porgramacion II\\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\\WpfApp5\\Empleados\\Lista_Operarios\\lstEmpleadoOpe.txt";
+        private string rutaArchivoTxt = @"C:\Users\Alumno\Escritorio\Proyecto_Final_Porgramacion II\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\DatosUsuario\datos.txt";
         public Empleado()
         {   
             InitializeComponent();
@@ -30,10 +30,7 @@ namespace WpfApp5
 
         private void btnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt))
-            {
-
-            }
+            
         }
     }
 }

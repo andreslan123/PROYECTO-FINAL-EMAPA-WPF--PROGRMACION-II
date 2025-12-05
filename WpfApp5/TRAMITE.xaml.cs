@@ -15,25 +15,13 @@ using System.Windows.Shapes;
 namespace WpfApp5
 {
     /// <summary>
-    /// Lógica de interacción para LOTE.xaml
+    /// Lógica de interacción para TRAMITE.xaml
     /// </summary>
-    public partial class LOTE : Window
+    public partial class TRAMITE : Window
     {
-        public LOTE()
+        public TRAMITE()
         {
             InitializeComponent();
-        }
-
-        private void btnvolver_Click(object sender, RoutedEventArgs e)
-        {
-            AccesoATodo acce = new AccesoATodo();
-            acce.Show();
-            this.Close();
-        }
-
-        private void dgInventario_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

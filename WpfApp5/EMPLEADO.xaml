@@ -190,7 +190,7 @@
                     Width="120"
                     Height="30"
                     FontSize="20"
-                    Background="Green"
+                    Background="Red"
                     Opacity="0.5">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -216,6 +216,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            
             
 
         </StackPanel>

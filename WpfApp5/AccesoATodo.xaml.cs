@@ -43,11 +43,40 @@ namespace WpfApp5
 
         private void btnEmpleado_Click(object sender, RoutedEventArgs e)
         {
-
+            Empleado emp = new Empleado();
+            emp.Show();
+            this.Close();
         }
 
         private void btnCliente_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private void btnTramite_Click(object sender, RoutedEventArgs e)
+        {
+            TRAMITE prove = new TRAMITE();
+            prove.Show();
+            this.Close();
+        }
+
+        private void btnProveedor_Click(object sender, RoutedEventArgs e)
+        {
+            PROVEEDOR prove = new PROVEEDOR();
+            prove.Show();
+            this.Close();
+        }
+
+        private void btnRegistro_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLote_Click(object sender, RoutedEventArgs e)
+        {
+            LOTE lot = new LOTE();
+            lot.Show();
+            this.Close();
         }
     }
 }

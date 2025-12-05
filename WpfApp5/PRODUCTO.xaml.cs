@@ -21,7 +21,7 @@ namespace WpfApp5
     public partial class PRODUCTO : Window
     {
         public ObservableCollection<Producto> lstProducto { get; set; } = new ObservableCollection<Producto>();
-        private string rutaArchivoTxt = "C:\\Users\\Alumno\\Escritorio\\Proyecto_Final_Porgramacion II\\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\\WpfApp5\\Lista_Productos\\lstProductos.txt";
+        private string rutaArchivoTxt = @"C:\Users\Alumno\Escritorio\Proyecto_Final_Porgramacion II\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\Lista_Productos.txt";
         public PRODUCTO()
         {
             InitializeComponent();

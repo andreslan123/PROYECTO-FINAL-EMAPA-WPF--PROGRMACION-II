@@ -140,7 +140,7 @@
           
           CanUserAddRows="False"
           CanUserDeleteRows="False"
-          IsReadOnly="True">
+          IsReadOnly="True" SelectionChanged="dgInventario_SelectionChanged">
 
             <DataGrid.Columns>
                 <!-- ID PRODUCTO -->

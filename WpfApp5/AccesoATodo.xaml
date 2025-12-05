@@ -95,7 +95,7 @@
                     Width="200"
                     Height="60"
                     FontSize="30"
-                    Background="Orange"
+                    Background="Aquamarine"
                     Opacity="0.5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center" Click="btnLote_Click">
@@ -142,7 +142,7 @@
                     Background="Aquamarine"
                     Opacity="0.5"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center" Click="btnProveedor_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"></Setter>
@@ -168,7 +168,7 @@
                     Background="Orange"
                     Opacity="0.5"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center" Click="btnRegistro_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"></Setter>
@@ -187,7 +187,7 @@
                     Background="Orange"
                     Opacity="0.5"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center" Click="btnTramite_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"></Setter>
