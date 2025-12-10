@@ -65,6 +65,7 @@
       <DependentUpon>EMPLEADO.xaml</DependentUpon>
     </Compile>
     <Compile Include="EmpleadoOperario.cs" />
+    <Compile Include="lote.cs" />
     <Compile Include="LOTE.xaml.cs">
       <DependentUpon>LOTE.xaml</DependentUpon>
     </Compile>
