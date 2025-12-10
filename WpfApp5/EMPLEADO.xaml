@@ -173,7 +173,7 @@
                     Height="30"
                     FontSize="20"
                     Background="Orange"
-                    Opacity="0.5">
+                    Opacity="0.5" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"></Setter>
@@ -191,7 +191,7 @@
                     Height="30"
                     FontSize="20"
                     Background="Red"
-                    Opacity="0.5">
+                    Opacity="0.5" Click="btnVolver_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="15"></Setter>

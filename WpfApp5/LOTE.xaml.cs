@@ -34,9 +34,6 @@ namespace WpfApp5
             acce.Show();
             this.Close();
         }
-        // ==============================
-        // CARGAR DATOS DEL ARCHIVO
-        // ==============================
         private void CargarArchivo()
         {
             if (!File.Exists(ruta))
@@ -63,10 +60,6 @@ namespace WpfApp5
             dgInventario.ItemsSource = null;
             dgInventario.ItemsSource = listaLotes;
         }
-
-        // ==============================
-        // GUARDAR DATOS
-        // ==============================
         private void btnGuardarDatos_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -166,7 +159,5 @@ namespace WpfApp5
             cbEstado.SelectedIndex = -1;
         }
     }
-
-
 }
 
