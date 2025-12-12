@@ -8,13 +8,12 @@ namespace WpfApp5
 {
     public class Producto
     {
-        //PROPIEDADES 
         public int IdProd { get; set; }
         public string Nombre { get; set; }
         public int Cantidad { get; set; }
         public double Precio { get; set; }
         public string Fecha { get; set; }
-        //CONSTRUCTORES
+
         public Producto()
         {
             IdProd = 0;
@@ -23,6 +22,7 @@ namespace WpfApp5
             Precio = 0;
             Fecha = "no definido";
         }
+
         public Producto(int idpro, string nompro, int canti, double pre, string fechaa)
         {
             IdProd = idpro;

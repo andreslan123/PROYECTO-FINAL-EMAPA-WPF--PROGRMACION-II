@@ -15,34 +15,104 @@ using System.Collections.ObjectModel;
 
 namespace WpfApp5
 {
-    /// <summary>
-    /// Lógica de interacción para Empleado.xaml
-    /// </summary>
     public partial class Empleado : Window
     {
-        public ObservableCollection<EmpleadoOperario> lstEmpleado { get; set; } = new ObservableCollection<EmpleadoOperario>();
-        private string rutaArchivoTxt = @"C:\Users\Alumno\Escritorio\Proyecto_Final_Porgramacion II\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\DatosUsuario\datos.txt";
+        private List<EmpleadoOperario> listaEmpleados = new List<EmpleadoOperario>();
+        private int contadorEmpleado = 1;
+
         public Empleado()
-        {   
+        {
             InitializeComponent();
+            ActualizarGrid();
         }
-        private int codEmpleOpe = 1000;
+
+        private void ActualizarGrid()
+        {
+            dgProducto.ItemsSource = null;
+            dgProducto.ItemsSource = listaEmpleados;
+        }
+
+        private void LimpiarCampos()
+        {
+            txtnNombreEmpleado.Clear();
+            txtnProductoIngresado.Clear();
+            txtCantidad.Clear();
+            txtPrecio.Clear();
+            txtFechaNaci.Clear();
+            txtTurno.Clear();
+        }
+
+        private bool ValidarCampos()
+        {
+            if (string.IsNullOrWhiteSpace(txtnNombreEmpleado.Text))
+            {
+                MessageBox.Show("Ingrese el nombre del empleado.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtnProductoIngresado.Text))
+            {
+                MessageBox.Show("Ingrese el apellido paterno.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtCantidad.Text))
+            {
+                MessageBox.Show("Ingrese el apellido materno.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPrecio.Text) || !long.TryParse(txtPrecio.Text, out _))
+            {
+                MessageBox.Show("Ingrese un teléfono válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!DateTime.TryParse(txtFechaNaci.Text, out _))
+            {
+                MessageBox.Show("Ingrese una fecha de nacimiento válida.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtTurno.Text))
+            {
+                MessageBox.Show("Ingrese el turno del empleado.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
 
         private void btnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
+            if (!ValidarCampos()) return;
 
-        private void btnSalir_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            EmpleadoOperario nuevo = new EmpleadoOperario
+            {
+                Id = contadorEmpleado++,
+                Nombre = txtnNombreEmpleado.Text,
+                ApePaterno = txtnProductoIngresado.Text,
+                ApeMaterno = txtCantidad.Text,
+                Telefono = txtPrecio.Text,
+                FechaNacimiento = DateTime.Parse(txtFechaNaci.Text),
+                Turno = txtTurno.Text
+            };
+
+            listaEmpleados.Add(nuevo);
+            ActualizarGrid();
+            LimpiarCampos();
+
+            MessageBox.Show("Empleado agregado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void btnVolver_Click(object sender, RoutedEventArgs e)
         {
-            AccesoATodo acc = new AccesoATodo();
-            acc.Show();
             this.Close();
+        }
+
+        private void btnSalir_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

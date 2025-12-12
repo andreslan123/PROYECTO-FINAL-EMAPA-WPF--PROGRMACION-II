@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp5
 {
-     public class Proveedor
+    public class Proveedor
     {
         public int IdProv { get; set; }
         public string NomProv { get; set; }
@@ -26,7 +26,5 @@ namespace WpfApp5
             CiProv = ci;
             LstPro = new List<Producto>();
         }
-
-
     }
 }

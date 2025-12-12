@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp5
 {
-    public class EmpleadoOperario
+    public class EmpleadoAdministrativo
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -18,3 +18,4 @@ namespace WpfApp5
         public string Turno { get; set; }
     }
 }
+

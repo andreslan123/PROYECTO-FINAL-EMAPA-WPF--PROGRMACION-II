@@ -25,64 +25,129 @@ namespace WpfApp5
 
             btnAgregarProveedor.Click += btnAgregarProveedor_Click;
             btnEliminarProveedor.Click += btnEliminarProveedor_Click;
+            btnEditarProveedor.Click += btnEditarProveedor_Click;
 
             ActualizarGrid();
         }
+
         private void ActualizarGrid()
         {
-            dgClientes.ItemsSource = null;  // Resetear
-            dgClientes.ItemsSource = listaProveedores; // Volver a cargar
+            dgProveedores.ItemsSource = null;
+            dgProveedores.ItemsSource = listaProveedores;
         }
 
         private void btnAgregarProveedor_Click(object sender, RoutedEventArgs e)
         {
+            if (!ValidarCampos(out int ci))
+                return;
 
-            if (txtNombre.Text == "")
+            // Validar CI único
+            if (listaProveedores.Any(p => p.CiProv == ci))
             {
-                MessageBox.Show("Ingrese un nombre");
+                MessageBox.Show("Ya existe un proveedor con este CI.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            int ci;
-            if (!int.TryParse(txtCI.Text, out ci))
-            {
-                MessageBox.Show("CI debe ser un número");
-                return;
-            }
-
-
-            Proveedor nuevo = new Proveedor(contadorID, txtNombre.Text, ci);
-
+            // Crear nuevo proveedor y agregar
+            Proveedor nuevo = new Proveedor(contadorID, txtNombre.Text.Trim(), ci);
             contadorID++;
 
             listaProveedores.Add(nuevo);
+            ActualizarGrid();
+            LimpiarCampos();
+
+            MessageBox.Show("Proveedor agregado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void btnEditarProveedor_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgProveedores.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un proveedor para modificar.", "Atención", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (!ValidarCampos(out int ci))
+                return;
+
+            Proveedor seleccionado = (Proveedor)dgProveedores.SelectedItem;
+
+            // Validar CI único, excepto el actual
+            if (listaProveedores.Any(p => p.CiProv == ci && p.IdProv != seleccionado.IdProv))
+            {
+                MessageBox.Show("Ya existe otro proveedor con este CI.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Modificar datos
+            seleccionado.NomProv = txtNombre.Text.Trim();
+            seleccionado.CiProv = ci;
 
             ActualizarGrid();
+            LimpiarCampos();
 
-            txtNombre.Clear();
-            txtCI.Clear();
+            MessageBox.Show("Proveedor modificado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void btnEliminarProveedor_Click(object sender, RoutedEventArgs e)
         {
-
-            if (dgClientes.SelectedItem == null)
+            if (dgProveedores.SelectedItem == null)
             {
-                MessageBox.Show("Seleccione un proveedor para eliminar");
+                MessageBox.Show("Seleccione un proveedor para eliminar.", "Atención", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            Proveedor seleccionado = (Proveedor)dgClientes.SelectedItem;
+            Proveedor seleccionado = (Proveedor)dgProveedores.SelectedItem;
 
-            listaProveedores.Remove(seleccionado);
-
-            ActualizarGrid();
-
+            var resultado = MessageBox.Show($"¿Seguro que desea eliminar al proveedor '{seleccionado.NomProv}'?", "Confirmar eliminación", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (resultado == MessageBoxResult.Yes)
+            {
+                listaProveedores.Remove(seleccionado);
+                ActualizarGrid();
+                LimpiarCampos();
+            }
         }
 
-        private void dgClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void dgProveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (dgProveedores.SelectedItem == null)
+            {
+                LimpiarCampos();
+                return;
+            }
 
+            Proveedor seleccionado = (Proveedor)dgProveedores.SelectedItem;
+
+            txtNombre.Text = seleccionado.NomProv;
+            txtCI.Text = seleccionado.CiProv.ToString();
+        }
+
+        private bool ValidarCampos(out int ci)
+        {
+            ci = 0;
+
+            string nombre = txtNombre.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(nombre) || nombre.Length < 3)
+            {
+                MessageBox.Show("Ingrese un nombre válido (mínimo 3 caracteres).", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (!int.TryParse(txtCI.Text.Trim(), out ci) || ci <= 0)
+            {
+                MessageBox.Show("CI debe ser un número mayor que 0.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void LimpiarCampos()
+        {
+            txtNombre.Clear();
+            txtCI.Clear();
+            dgProveedores.SelectedItem = null;
         }
     }
 }

@@ -61,8 +61,18 @@
     <Compile Include="Bienvenida.xaml.cs">
       <DependentUpon>Bienvenida.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cliente.cs" />
+    <Compile Include="CLIENTE.xaml.cs">
+      <DependentUpon>CLIENTE.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EMPLEADOAD.xaml.cs">
+      <DependentUpon>EMPLEADOAD.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EMPLEADO.xaml.cs">
       <DependentUpon>EMPLEADO.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\Downloads\EmpleadoAdministrativo.cs">
+      <Link>EmpleadoAdministrativo.cs</Link>
     </Compile>
     <Compile Include="EmpleadoOperario.cs" />
     <Compile Include="lote.cs" />
@@ -80,6 +90,7 @@
     <Compile Include="Sign_UP.xaml.cs">
       <DependentUpon>Sign_UP.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tramite.cs" />
     <Compile Include="TRAMITE.xaml.cs">
       <DependentUpon>TRAMITE.xaml</DependentUpon>
     </Compile>
@@ -91,7 +102,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CLIENTE.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EMPLEADO.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EMPLEADOAD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

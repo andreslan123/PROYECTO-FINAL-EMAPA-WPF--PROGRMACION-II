@@ -78,5 +78,15 @@ namespace WpfApp5
             lot.Show();
             this.Close();
         }
+
+        private void btnEmpleadoAdmin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnOperario_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

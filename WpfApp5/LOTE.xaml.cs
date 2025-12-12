@@ -1,163 +1,173 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.IO;
-
 
 namespace WpfApp5
 {
-    /// <summary>
-    /// Lógica de interacción para LOTE.xaml
-    /// </summary>
     public partial class LOTE : Window
     {
-        string ruta = @"C:\Users\Alumno\Escritorio\proyecto program II\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\LOTES\lotex.txt";
-        List<lote> listaLotes = new List<lote>();
+        private List<Lote> listaLotes = new List<Lote>();
+        private int contadorLote = 1;
+        private Lote seleccionado = null;
+
         public LOTE()
         {
             InitializeComponent();
+            dpFechaIngreso.SelectedDate = DateTime.Now;
+            dpFechaVencimiento.SelectedDate = DateTime.Now;
+            ActualizarGrid();
         }
 
-        private void btnvolver_Click(object sender, RoutedEventArgs e)
+        private void ActualizarGrid()
         {
-            AccesoATodo acce = new AccesoATodo();
-            acce.Show();
-            this.Close();
-        }
-        private void CargarArchivo()
-        {
-            if (!File.Exists(ruta))
-                return;
-
-            listaLotes.Clear();
-
-            foreach (var linea in File.ReadAllLines(ruta))
-            {
-                var data = linea.Split('|');
-                listaLotes.Add(new lote
-                {
-                    IdProducto = data[0],
-                    IdLote = data[1],
-                    CantidadTotal = int.Parse(data[2]),
-                    CantidadDisponible = int.Parse(data[3]),
-                    FechaIngreso = DateTime.Parse(data[4]),
-                    FechaVencimiento = DateTime.Parse(data[5]),
-                    IdProveedor = data[6],
-                    Estado = data[7]
-                });
-            }
-
             dgInventario.ItemsSource = null;
             dgInventario.ItemsSource = listaLotes;
         }
+
+        private void LimpiarCampos()
+        {
+            txtFKProducto.Clear();
+            txtPKLote.Clear();
+            txtCantidadTotal.Clear();
+            txtCantidadDisponible.Clear();
+            txtFKProveedor.Clear();
+            cbEstado.SelectedIndex = -1;
+            dpFechaIngreso.SelectedDate = DateTime.Now;
+            dpFechaVencimiento.SelectedDate = DateTime.Now;
+            seleccionado = null;
+            dgInventario.SelectedItem = null;
+        }
+
+        private bool ValidarCampos()
+        {
+            if (string.IsNullOrWhiteSpace(txtFKProducto.Text) || !int.TryParse(txtFKProducto.Text, out _))
+            {
+                MessageBox.Show("Ingrese un ID de producto válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtCantidadTotal.Text) || !int.TryParse(txtCantidadTotal.Text, out int total) || total < 0)
+            {
+                MessageBox.Show("Ingrese una cantidad total válida.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtCantidadDisponible.Text) || !int.TryParse(txtCantidadDisponible.Text, out int disponible) || disponible < 0 || disponible > total)
+            {
+                MessageBox.Show("Ingrese una cantidad disponible válida.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (dpFechaIngreso.SelectedDate == null || dpFechaVencimiento.SelectedDate == null)
+            {
+                MessageBox.Show("Seleccione fechas válidas.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (dpFechaIngreso.SelectedDate > dpFechaVencimiento.SelectedDate)
+            {
+                MessageBox.Show("La fecha de ingreso no puede ser mayor que la de vencimiento.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtFKProveedor.Text) || !int.TryParse(txtFKProveedor.Text, out _))
+            {
+                MessageBox.Show("Ingrese un ID de proveedor válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if (cbEstado.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un estado.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
         private void btnGuardarDatos_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (!ValidarCampos()) return;
+
+            if (seleccionado == null)
             {
-                lote lote = new lote
+                // Nuevo lote
+                Lote nuevo = new Lote
                 {
-                    IdProducto = txtFKProducto.Text,
-                    IdLote = txtPKLote.Text,
+                    IdLote = contadorLote++,
+                    IdProducto = int.Parse(txtFKProducto.Text),
                     CantidadTotal = int.Parse(txtCantidadTotal.Text),
                     CantidadDisponible = int.Parse(txtCantidadDisponible.Text),
                     FechaIngreso = dpFechaIngreso.SelectedDate.Value,
                     FechaVencimiento = dpFechaVencimiento.SelectedDate.Value,
-                    IdProveedor = txtFKProveedor.Text,
-                    Estado = ((ComboBoxItem)cbEstado.SelectedItem).Content.ToString()
+                    IdProveedor = int.Parse(txtFKProveedor.Text),
+                    Estado = (cbEstado.SelectedItem as ComboBoxItem).Content.ToString()
                 };
 
-                listaLotes.Add(lote);
-
-                GuardarArchivo();
-                CargarArchivo();
-                LimpiarCampos();
-
-                MessageBox.Show("Datos guardados correctamente.");
+                listaLotes.Add(nuevo);
+                MessageBox.Show("Lote agregado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch
+            else
             {
-                MessageBox.Show("Revise que todos los campos estén completos.");
+                // Editar lote
+                seleccionado.IdProducto = int.Parse(txtFKProducto.Text);
+                seleccionado.CantidadTotal = int.Parse(txtCantidadTotal.Text);
+                seleccionado.CantidadDisponible = int.Parse(txtCantidadDisponible.Text);
+                seleccionado.FechaIngreso = dpFechaIngreso.SelectedDate.Value;
+                seleccionado.FechaVencimiento = dpFechaVencimiento.SelectedDate.Value;
+                seleccionado.IdProveedor = int.Parse(txtFKProveedor.Text);
+                seleccionado.Estado = (cbEstado.SelectedItem as ComboBoxItem).Content.ToString();
+
+                MessageBox.Show("Lote editado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+
+            ActualizarGrid();
+            LimpiarCampos();
         }
-
-        private void GuardarArchivo()
-        {
-            List<string> lineas = new List<string>();
-
-            foreach (var item in listaLotes)
-            {
-                lineas.Add($"{item.IdProducto}|{item.IdLote}|{item.CantidadTotal}|{item.CantidadDisponible}|{item.FechaIngreso}|{item.FechaVencimiento}|{item.IdProveedor}|{item.Estado}");
-            }
-
-            File.WriteAllLines(ruta, lineas);
-        }
-
 
         private void dgInventario_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (dgInventario.SelectedItem is lote lote)
+            seleccionado = (Lote)dgInventario.SelectedItem;
+            if (seleccionado != null)
             {
-                txtFKProducto.Text = lote.IdProducto;
-                txtPKLote.Text = lote.IdLote;
-                txtCantidadTotal.Text = lote.CantidadTotal.ToString();
-                txtCantidadDisponible.Text = lote.CantidadDisponible.ToString();
-                dpFechaIngreso.SelectedDate = lote.FechaIngreso;
-                dpFechaVencimiento.SelectedDate = lote.FechaVencimiento;
-                txtFKProveedor.Text = lote.IdProveedor;
-                cbEstado.Text = lote.Estado;
+                txtFKProducto.Text = seleccionado.IdProducto.ToString();
+                txtPKLote.Text = seleccionado.IdLote.ToString();
+                txtCantidadTotal.Text = seleccionado.CantidadTotal.ToString();
+                txtCantidadDisponible.Text = seleccionado.CantidadDisponible.ToString();
+                txtFKProveedor.Text = seleccionado.IdProveedor.ToString();
+                dpFechaIngreso.SelectedDate = seleccionado.FechaIngreso;
+                dpFechaVencimiento.SelectedDate = seleccionado.FechaVencimiento;
+                cbEstado.SelectedItem = null;
+                foreach (ComboBoxItem item in cbEstado.Items)
+                {
+                    if (item.Content.ToString() == seleccionado.Estado)
+                    {
+                        cbEstado.SelectedItem = item;
+                        break;
+                    }
+                }
             }
         }
+
+        private void btnvolver_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        // Botón borrar
         private void btnBorrar_Click(object sender, RoutedEventArgs e)
         {
-            if (dgInventario.SelectedItem is lote lote)
+            if (seleccionado == null)
             {
-                listaLotes.Remove(lote);
-                GuardarArchivo();
-                CargarArchivo();
-                LimpiarCampos();
+                MessageBox.Show("Seleccione un lote para borrar.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
-        }
 
-        private void btnEditar_Click(object sender, RoutedEventArgs e)
-        {
-            if (dgInventario.SelectedItem is lote seleccion)
-            {
-                seleccion.IdProducto = txtFKProducto.Text;
-                seleccion.IdLote = txtPKLote.Text;
-                seleccion.CantidadTotal = int.Parse(txtCantidadTotal.Text);
-                seleccion.CantidadDisponible = int.Parse(txtCantidadDisponible.Text);
-                seleccion.FechaIngreso = dpFechaIngreso.SelectedDate.Value;
-                seleccion.FechaVencimiento = dpFechaVencimiento.SelectedDate.Value;
-                seleccion.IdProveedor = txtFKProveedor.Text;
-                seleccion.Estado = cbEstado.Text;
-
-                GuardarArchivo();
-                CargarArchivo();
-
-                MessageBox.Show("Registro editado.");
-            }
-        }
-        private void LimpiarCampos()
-        {
-            txtFKProducto.Text = "";
-            txtPKLote.Text = "";
-            txtCantidadTotal.Text = "";
-            txtCantidadDisponible.Text = "";
-            dpFechaIngreso.SelectedDate = null;
-            dpFechaVencimiento.SelectedDate = null;
-            txtFKProveedor.Text = "";
-            cbEstado.SelectedIndex = -1;
+            listaLotes.Remove(seleccionado);
+            ActualizarGrid();
+            LimpiarCampos();
+            MessageBox.Show("Lote eliminado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
-

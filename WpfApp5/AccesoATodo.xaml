@@ -1,220 +1,124 @@
 ﻿<Window x:Class="WpfApp5.AccesoATodo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp5"
-        mc:Ignorable="d"
         Title="AccesoATodo" Height="700" Width="600"
         Icon="/imagenes/Logotipo.png">
+
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/imagenes/fondoAzul.jpg"></ImageBrush>
+            <ImageBrush ImageSource="/imagenes/fondoAzul.jpg" />
         </Grid.Background>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <UniformGrid Grid.Row="0" Columns="3" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center" >
 
-        <StackPanel Grid.Row="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="8"
-                    Orientation="Horizontal">
-            <Button x:Name="btnAtencion"
-                    Margin="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    Content="ATENCION"
-                    Width="200"
-                    Height="60"
-                    FontSize="30"
-                    Background="Orange"
-                    Opacity="0.5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Click="btnAtencion_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"></Setter>
-                    </Style>
-                </Button.Resources>
-
-            </Button>
-            <Button x:Name="btnCliente"
-                    Margin="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    Content="CLIENTE"
-                    Width="200"
-                    Height="60"
-                    FontSize="30"
-                    Background="Aquamarine"
-                    Opacity="0.5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Click="btnCliente_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"></Setter>
-                    </Style>
-                </Button.Resources>
-            </Button>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="8"
-                    Orientation="Horizontal">
             <Button x:Name="btnEmpleado"
-                    Margin="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
                     Content="EMPLEADO"
-                    Width="200"
-                    Height="60"
-                    FontSize="30"
+                    Width="170" Height="60"
+                    Margin="10"
                     Background="Aquamarine"
-                    Opacity="0.5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Click="btnEmpleado_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"></Setter>
-                    </Style>
-                </Button.Resources>
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Opacity="0.8"
+                    Click="btnEmpleado_Click" />
 
-            </Button>
-            <Button x:Name="btnLote"
-                    Margin="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    Content="LOTE"
-                    Width="200"
-                    Height="60"
-                    FontSize="30"
+            <Button x:Name="btnEmpleadoAdmin"
+                    Content="ADMINISTRATIVO"
+                    Width="170" Height="60"
+                    Margin="10"
                     Background="Aquamarine"
-                    Opacity="0.5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Click="btnLote_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"></Setter>
-                    </Style>
-                </Button.Resources>
-            </Button>
-        </StackPanel>
-        
-        <StackPanel Grid.Row="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="8"
-                    Orientation="Horizontal">
-            <Button x:Name="btnProducto"
-                    Margin="20"
+                    FontSize="20"
                     FontWeight="Bold"
-                    Foreground="Black"
-                    Content="PRODUCTO"
-                    Width="200"
-                    Height="60"
-                    FontSize="30"
-                    Background="Aquamarine"
-                    Opacity="0.5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Click="btnProducto_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"></Setter>
-                    </Style>
-                </Button.Resources>
+                    Opacity="0.8"
+                    Click="btnEmpleadoAdmin_Click" />
 
-            </Button>
-            <Button x:Name="btnProveedor"
-                    Margin="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    Content="PROVEEDOR"
-                    Width="200"
-                    Height="60"
-                    FontSize="30"
+            <Button x:Name="btnOperario"
+                    Content="OPERARIO"
+                    Width="170" Height="60"
+                    Margin="10"
                     Background="Aquamarine"
-                    Opacity="0.5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Click="btnProveedor_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"></Setter>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            
-            
-        </StackPanel>
-        <StackPanel Grid.Row="3"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="8"
-                    Orientation="Horizontal">
-            <Button x:Name="btnRegistro"
-                    Margin="20"
+                    FontSize="20"
                     FontWeight="Bold"
-                    Foreground="Black"
-                    Content="REGISTRO"
-                    Width="200"
-                    Height="60"
-                    FontSize="30"
-                    Background="Orange"
-                    Opacity="0.5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Click="btnRegistro_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"></Setter>
-                    </Style>
-                </Button.Resources>
+                    Opacity="0.8"
+                    Click="btnOperario_Click" />
+        </UniformGrid>
 
-            </Button>
+        <UniformGrid Grid.Row="1" Columns="2" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <Button x:Name="btnCliente"
+                    Content="CLIENTE"
+                    Width="250" Height="60"
+                    Margin="10"
+                    Background="Aquamarine"
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Opacity="0.8"
+                    Click="btnCliente_Click" />
+
             <Button x:Name="btnTramite"
-                    Margin="20"
-                    FontWeight="Bold"
-                    Foreground="Black"
-                    Content="TRAMITE"
-                    Width="200"
-                    Height="60"
-                    FontSize="30"
+                    Content="TRÁMITE"
+                    Width="250" Height="60"
+                    Margin="10"
                     Background="Orange"
-                    Opacity="0.5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Click="btnTramite_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="15"></Setter>
-                    </Style>
-                </Button.Resources>
-            </Button>
-        </StackPanel>
-        <Button x:Name="btnCerrarPrincipal"
-                    Margin="20,0,80,0"
+                    FontSize="22"
                     FontWeight="Bold"
-                    Foreground="Black"
-                    Content="CERRAR"
-                    Width="250"
-                    Grid.Row="4"
-                    Height="80"
-                    FontSize="30"
-                    Background="Red"
-                    Opacity="0.5"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center" Click="btnCerrarPrincipal_Click">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15"></Setter>
-                </Style>
-            </Button.Resources>
-        </Button>
+                    Opacity="0.8"
+                    Click="btnTramite_Click" />
+        </UniformGrid>
+        <UniformGrid Grid.Row="2" Columns="2" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-        
+            <Button x:Name="btnProducto"
+                    Content="PRODUCTO"
+                    Width="250" Height="60"
+                    Margin="10"
+                    Background="Aquamarine"
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Opacity="0.8"
+                    Click="btnProducto_Click" />
+
+            <Button x:Name="btnProveedor"
+                    Content="PROVEEDOR"
+                    Width="250" Height="60"
+                    Margin="10"
+                    Background="Aquamarine"
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Opacity="0.8"
+                    Click="btnProveedor_Click" />
+        </UniformGrid>
+
+        <!-- Lote (solo uno) -->
+        <StackPanel Grid.Row="3" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <Button x:Name="btnLote"
+                    Content="LOTE"
+                    Width="350" Height="60"
+                    Margin="10"
+                    Background="Aquamarine"
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Opacity="0.8"
+                    Click="btnLote_Click" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" HorizontalAlignment="Right" Margin="20">
+            <Button x:Name="btnCerrarPrincipal"
+                    Content="CERRAR"
+                    Width="150" Height="50"
+                    Background="Red"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Opacity="0.8"
+                    Click="btnCerrarPrincipal_Click" />
+        </StackPanel>
+
     </Grid>
 </Window>

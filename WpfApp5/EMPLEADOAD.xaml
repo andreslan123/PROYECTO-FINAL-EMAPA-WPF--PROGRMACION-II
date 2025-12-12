@@ -1,0 +1,70 @@
+﻿<Window x:Class="WpfApp5.EmpleadoAdministrativo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Empleado Administrativo" Height="500" Width="700">
+    <Grid Background="#FF007ACC" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Empleado Administrativo" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Row="0"/>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20" Background="#20202020" >
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Nombre:" Width="120" Foreground="White" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtNombre" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Apellido Paterno:" Width="120" Foreground="White" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtApePaterno" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Apellido Materno:" Width="120" Foreground="White" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtApeMaterno" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Teléfono:" Width="120" Foreground="White" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtTelefono" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Fecha Nacimiento:" Width="120" Foreground="White" VerticalAlignment="Center"/>
+                <DatePicker x:Name="dpFechaNacimiento" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <Label Content="Turno:" Width="120" Foreground="White" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbTurno" Width="200">
+                    <ComboBoxItem Content="Mañana"/>
+                    <ComboBoxItem Content="Tarde"/>
+                    <ComboBoxItem Content="Noche"/>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        <DataGrid x:Name="dgEmpleados" Grid.Row="2" Margin="20" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="150"/>
+                <DataGridTextColumn Header="Apellido Paterno" Binding="{Binding ApePaterno}" Width="150"/>
+                <DataGridTextColumn Header="Apellido Materno" Binding="{Binding ApeMaterno}" Width="150"/>
+                <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="120"/>
+                <DataGridTextColumn Header="Fecha Nacimiento" Binding="{Binding FechaNacimiento, StringFormat=d}" Width="120"/>
+                <DataGridTextColumn Header="Turno" Binding="{Binding Turno}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Agregar" Width="120" Margin="10" Click="btnAgregar_Click"/>
+            <Button Content="Eliminar" Width="120" Margin="10" Click="btnEliminar_Click"/>
+            <Button Content="Salir" Width="120" Margin="10" Click="btnSalir_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
