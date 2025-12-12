@@ -13,16 +13,6 @@ using System.Threading.Tasks;
             public string Descripcion { get; set; }
             public DateTime Fecha { get; set; }
             public string Responsable { get; set; }
-
-            public Tramite() { }
-
-            public Tramite(int id, string descripcion, DateTime fecha, string responsable)
-            {
-                IdTramite = id;
-                Descripcion = descripcion;
-                Fecha = fecha;
-                Responsable = responsable;
-            }
         }
     }
 

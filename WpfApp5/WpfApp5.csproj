@@ -65,14 +65,12 @@
     <Compile Include="CLIENTE.xaml.cs">
       <DependentUpon>CLIENTE.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmpAdministrativo.cs" />
     <Compile Include="EMPLEADOAD.xaml.cs">
       <DependentUpon>EMPLEADOAD.xaml</DependentUpon>
     </Compile>
     <Compile Include="EMPLEADO.xaml.cs">
       <DependentUpon>EMPLEADO.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="..\..\..\Downloads\EmpleadoAdministrativo.cs">
-      <Link>EmpleadoAdministrativo.cs</Link>
     </Compile>
     <Compile Include="EmpleadoOperario.cs" />
     <Compile Include="lote.cs" />

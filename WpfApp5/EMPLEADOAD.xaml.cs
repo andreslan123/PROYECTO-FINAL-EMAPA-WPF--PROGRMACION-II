@@ -2,83 +2,95 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
+using System.IO;
+
 
 namespace WpfApp5
 {
     public partial class EmpleadoAdministrativo : Window
     {
-        private List<EmpleadoAdministrativo> listaEmpleados = new List<EmpleadoAdministrativo>();
-        private int contadorId = 1;
+        private readonly string rutaYnombreArch = @"C:\Users\Santivañez\Desktop\PROYECTITO PROGRAM II\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\empAdministrativo\datos.txt";
+        ObservableCollection<EmpAdministrativo> listaEmpleados = new ObservableCollection<EmpAdministrativo>();
+        int contadorID = 1;
 
         public EmpleadoAdministrativo()
         {
             InitializeComponent();
-            dpFechaNacimiento.SelectedDate = DateTime.Now;
-            cbTurno.SelectedIndex = 0;
-            ActualizarGrid();
+            dgProducto.ItemsSource = listaEmpleados;
         }
-
-        private void ActualizarGrid()
+        private void btnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
-            dgEmpleados.ItemsSource = null;
-            dgEmpleados.ItemsSource = listaEmpleados;
-        }
-
-        private void btnAgregar_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
-                string.IsNullOrWhiteSpace(txtApePaterno.Text) ||
-                string.IsNullOrWhiteSpace(txtApeMaterno.Text) ||
-                string.IsNullOrWhiteSpace(txtTelefono.Text) ||
-                !dpFechaNacimiento.SelectedDate.HasValue ||
-                cbTurno.SelectedItem == null)
+            try
             {
-                MessageBox.Show("Todos los campos son obligatorios.");
-                return;
+                EmpAdministrativo emp = new EmpAdministrativo()
+                {
+                    Id = contadorID++,
+                    Nombre = txtnNombreEmpleado.Text,
+                    ApePaterno = txtnProductoIngresado.Text,
+                    ApeMaterno = txtCantidad.Text,
+                    FechaNacimiento = txtFechaNaci.Text,
+                    Turno = txtTurno.Text,
+                    Telefono = "N/A"
+                };
+
+                listaEmpleados.Add(emp);
+                LimpiarCampos();
             }
-
-            EmpleadoAdministrativo nuevoEmpleado = new EmpleadoAdministrativo
+            catch
             {
-                Id = contadorId++,
-                Nombre = txtNombre.Text,
-                ApePaterno = txtApePaterno.Text,
-                ApeMaterno = txtApeMaterno.Text,
-                Telefono = txtTelefono.Text,
-                FechaNacimiento = dpFechaNacimiento.SelectedDate.Value,
-                Turno = ((ComboBoxItem)cbTurno.SelectedItem).Content.ToString()
-            };
-
-            listaEmpleados.Add(nuevoEmpleado);
-            ActualizarGrid();
-            LimpiarCampos();
+                MessageBox.Show("Error al agregar el empleado.");
+            }
         }
-
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            if (dgEmpleados.SelectedItem == null)
+            if (dgProducto.SelectedItem is EmpAdministrativo seleccionado)
             {
-                MessageBox.Show("Seleccione un empleado para eliminar.");
-                return;
+                listaEmpleados.Remove(seleccionado);
             }
-
-            EmpleadoAdministrativo seleccionado = (EmpleadoAdministrativo)dgEmpleados.SelectedItem;
-            listaEmpleados.Remove(seleccionado);
-            ActualizarGrid();
+            else
+            {
+                MessageBox.Show("Selecciona un empleado para eliminar.");
+            }
         }
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(rutaYnombreArch, false))
+                {
+                    foreach (var emp in listaEmpleados)
+                    {
+                        writer.WriteLine(
+                            $"{emp.Id};{emp.Nombre};{emp.ApePaterno};{emp.ApeMaterno};{emp.FechaNacimiento};{emp.Telefono};{emp.Turno}"
+                        );
+                    }
+                }
 
+                MessageBox.Show("Datos guardados correctamente en el archivo TXT.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar los datos: " + ex.Message);
+            }
+        }
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
+            Application.Current.Shutdown();
+        }
+        private void btnVolver_Click(object sender, RoutedEventArgs e)
+        {
+            AccesoATodo acc = new AccesoATodo();
+            acc.Show();
             this.Close();
         }
-
         private void LimpiarCampos()
         {
-            txtNombre.Clear();
-            txtApePaterno.Clear();
-            txtApeMaterno.Clear();
-            txtTelefono.Clear();
-            dpFechaNacimiento.SelectedDate = DateTime.Now;
-            cbTurno.SelectedIndex = 0;
+            txtnNombreEmpleado.Text = "";
+            txtnProductoIngresado.Text = "";
+            txtCantidad.Text = "";
+            txtFechaNaci.Text = "";
+            txtTurno.Text = "";
         }
     }
 }

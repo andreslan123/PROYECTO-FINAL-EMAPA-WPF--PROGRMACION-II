@@ -51,9 +51,10 @@
 
         <!-- BOTONES -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,15">
-            <Button x:Name="btnAgregarTramite" Content="Agregar" Width="120" Height="40" Margin="0,0,10,0" FontWeight="Bold" Background="Green" Foreground="White"/>
-            <Button x:Name="btnEditarTramite" Content="Modificar" Width="120" Height="40" Margin="0,0,10,0" FontWeight="Bold" Background="DodgerBlue" Foreground="White"/>
-            <Button x:Name="btnEliminarTramite" Content="Eliminar" Width="120" Height="40" Background="Red" Foreground="White" FontWeight="Bold"/>
+            <Button x:Name="btnAgregarTramite" Content="Agregar" Width="120" Height="40" Margin="0,0,10,0" FontWeight="Bold" Background="Green" Foreground="White" Click="btnAgregarTramite_Click_1"/>
+            <Button x:Name="btnEditarTramite" Content="Modificar" Width="120" Height="40" Margin="0,0,10,0" FontWeight="Bold" Background="DodgerBlue" Foreground="White" Click="btnEditarTramite_Click_1"/>
+            <Button x:Name="btnEliminarTramite" Content="Eliminar" Width="120" Height="40" Background="Red" Foreground="White" FontWeight="Bold" Click="btnEliminarTramite_Click_1"/>
+            <Button x:Name="btnVolver" Content="Volver" Width="120" Height="40" Background="Orange" Foreground="White" FontWeight="Bold" Margin="10,0,10,0" Click="btnVolver_Click"/>
         </StackPanel>
 
         <!-- DATAGRID TRÁMITES -->

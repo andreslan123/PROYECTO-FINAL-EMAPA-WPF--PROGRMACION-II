@@ -3,68 +3,240 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="Empleado Administrativo" Height="500" Width="700">
-    <Grid Background="#FF007ACC" Margin="10">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/fondoAzul.jpg"></ImageBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Empleado Administrativo" FontSize="28" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Row="0"/>
 
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20" Background="#20202020" >
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="Nombre:" Width="120" Foreground="White" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtNombre" Width="200"/>
-            </StackPanel>
+        <Label x:Name="lblTItulo"
+               FontSize="30"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="EMPLEADO ADMINISTRATIVO"
+               Foreground="White">
+        </Label>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="5"
+                    Grid.Row="1">
+            <Label x:Name="lblNombreEmpleado"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="Nombre: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtnNombreEmpleado"
+                     Margin="5"
+                     Width="150"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
+            <Label x:Name="lblApePat"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="Ape.Paterno: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtnProductoIngresado"
+                     Margin="5"
+                     Width="180"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="Apellido Paterno:" Width="120" Foreground="White" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtApePaterno" Width="200"/>
-            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="5"
+                    Grid.Row="2">
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="Apellido Materno:" Width="120" Foreground="White" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtApeMaterno" Width="200"/>
-            </StackPanel>
+            <Label x:Name="lblApeMaterno"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="Ape.Materno: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtCantidad"
+                     Margin="5"
+                     Width="180"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="5"
+                    Grid.Row="3">
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="Teléfono:" Width="120" Foreground="White" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtTelefono" Width="200"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="Fecha Nacimiento:" Width="120" Foreground="White" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpFechaNacimiento" Width="200"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="Turno:" Width="120" Foreground="White" VerticalAlignment="Center"/>
-                <ComboBox x:Name="cbTurno" Width="200">
-                    <ComboBoxItem Content="Mañana"/>
-                    <ComboBoxItem Content="Tarde"/>
-                    <ComboBoxItem Content="Noche"/>
-                </ComboBox>
-            </StackPanel>
+            <Label x:Name="lblFechaNacimiento"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="Fecha Nacimiento: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtFechaNaci"
+                     Margin="5"
+                     Width="150"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
+            <Label x:Name="lblTurno"
+               FontSize="15"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Content="Turno: "
+               Foreground="White">
+            </Label>
+            <TextBox x:Name="txtTurno"
+                     Margin="5"
+                     Width="90"
+                     FontWeight="Bold"
+                     FontSize="15">
+            </TextBox>
         </StackPanel>
 
-        <DataGrid x:Name="dgEmpleados" Grid.Row="2" Margin="20" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single">
+        <DataGrid x:Name="dgProducto"
+              Grid.Row="4"
+              AutoGenerateColumns="False"
+              Margin="5"
+              Opacity="0.7">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="150"/>
-                <DataGridTextColumn Header="Apellido Paterno" Binding="{Binding ApePaterno}" Width="150"/>
-                <DataGridTextColumn Header="Apellido Materno" Binding="{Binding ApeMaterno}" Width="150"/>
-                <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="120"/>
-                <DataGridTextColumn Header="Fecha Nacimiento" Binding="{Binding FechaNacimiento, StringFormat=d}" Width="120"/>
-                <DataGridTextColumn Header="Turno" Binding="{Binding Turno}" Width="100"/>
+                <DataGridTextColumn Header="ID " 
+                                    Binding="{Binding Id}" 
+                                    Width="Auto"/>
+                <DataGridTextColumn Header="Nombre" 
+                                    Binding="{Binding Nombre}" 
+                                    Width="100"/>
+                <DataGridTextColumn Header="Ape.Paterno" 
+                                    Binding="{Binding ApePaterno}" 
+                                    Width="100"/>
+                <DataGridTextColumn Header="Ape.Materno" 
+                                    Binding="{Binding ApeMaterno}" 
+                                    Width="100"/>
+                <DataGridTextColumn Header="Fecha de Naci." 
+                                    Binding="{Binding FechaNacimiento}" 
+                                    Width="100"/>
+                <DataGridTextColumn Header="Telefono" 
+                                    Binding="{Binding Telefono}" 
+                                    Width="130"/>
+                <DataGridTextColumn Header="Turno" 
+                                    Binding="{Binding Turno}" 
+                                    Width="100"/>
+
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Grid.Row="5"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <Button x:Name="btnSalir"
+                
+                    Margin="14"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="SALIR"
+                    Width="90"
+                    Height="30"
+                    FontSize="20"
+                    Background="Orange"
+                    Opacity="0.5" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="Agregar" Width="120" Margin="10" Click="btnAgregar_Click"/>
-            <Button Content="Eliminar" Width="120" Margin="10" Click="btnEliminar_Click"/>
-            <Button Content="Salir" Width="120" Margin="10" Click="btnSalir_Click"/>
+            </Button>
+            <Button x:Name="btnVolver"
+                
+                    Margin="20"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="VOLVER"
+                    Width="100"
+                    Height="30"
+                    FontSize="20"
+                    Background="OrangeRed"
+                    Opacity="0.5" Click="btnVolver_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+            <Button x:Name="btnAgregarProducto"
+                
+                    Margin="20"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="Agregar"
+                    Width="100"
+                    Height="30"
+                    FontSize="20"
+                    Background="Aquamarine"
+                    Opacity="0.5" Click="btnAgregarProducto_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btnGuardar"
+                
+                    Margin="20"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="Guardar"
+                    Width="100"
+                    Height="30"
+                    FontSize="20"
+                    Background="Aquamarine"
+                    Opacity="0.5" Click="btnAgregarProducto_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btnEliminar"
+                
+                    Margin="20"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Content="Eliminar"
+                    Width="100"
+                    Height="30"
+                    FontSize="20"
+                    Background="Aquamarine"
+                    Opacity="0.5" Click="btnAgregarProducto_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="15"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

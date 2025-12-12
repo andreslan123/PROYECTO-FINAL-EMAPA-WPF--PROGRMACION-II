@@ -21,7 +21,7 @@ namespace WpfApp5
     /// </summary>
     public partial class Sign_UP : Window
     {
-        private readonly string rutaYnombreArch = @"C:\Users\Alumno\Escritorio\proyecto program II\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\DatosUsuario\datos.txt";
+        private readonly string rutaYnombreArch = @"C:\Users\Santivañez\Desktop\PROYECTITO PROGRAM II\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\DatosUsuario\datos.txt";
         public Sign_UP()
         {
             InitializeComponent();

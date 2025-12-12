@@ -2,139 +2,144 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.IO;
+using System.Collections.ObjectModel;
 
 namespace WpfApp5
 {
     public partial class TRAMITE : Window
     {
-        private List<Tramite> listaTramites = new List<Tramite>();
+        private readonly string rutaArchivo = @"C:\Users\Santivañez\Desktop\PROYECTITO PROGRAM II\PROYECTO-FINAL-EMAPA-WPF--PROGRMACION-II\WpfApp5\Tramite\datos.txt";
+        private ObservableCollection<Tramite> listaTramites = new ObservableCollection<Tramite>();
         private int contadorID = 1;
 
         public TRAMITE()
         {
             InitializeComponent();
-
-            // Inicializar fecha con hoy
-            dpFecha.SelectedDate = DateTime.Now;
-
-            // Eventos
-            btnAgregarTramite.Click += btnAgregarTramite_Click;
-            btnEditarTramite.Click += btnEditarTramite_Click;
-            btnEliminarTramite.Click += btnEliminarTramite_Click;
-            dgTramites.SelectionChanged += dgTramites_SelectionChanged;
-
-            ActualizarGrid();
-        }
-
-        private void ActualizarGrid()
-        {
-            dgTramites.ItemsSource = null;
             dgTramites.ItemsSource = listaTramites;
+            CargarDatos();
         }
 
-        private void btnAgregarTramite_Click(object sender, RoutedEventArgs e)
+        private void btnAgregarTramite_Click_1(object sender, RoutedEventArgs e)
         {
-            if (!ValidarCampos(out string desc, out DateTime fecha, out string resp))
+            if (string.IsNullOrWhiteSpace(txtDescripcion.Text) || dpFecha.SelectedDate == null || string.IsNullOrWhiteSpace(txtResponsable.Text))
+            {
+                MessageBox.Show("Complete todos los campos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
+            }
 
-            Tramite nuevo = new Tramite(contadorID, desc, fecha, resp);
-            contadorID++;
+            Tramite nuevo = new Tramite()
+            {
+                IdTramite = contadorID++,
+                Descripcion = txtDescripcion.Text,
+                Fecha = dpFecha.SelectedDate.Value,
+                Responsable = txtResponsable.Text
+            };
 
             listaTramites.Add(nuevo);
-            ActualizarGrid();
             LimpiarCampos();
-
-            MessageBox.Show("Trámite agregado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void btnEditarTramite_Click(object sender, RoutedEventArgs e)
+        private void btnEditarTramite_Click_1(object sender, RoutedEventArgs e)
         {
-            if (dgTramites.SelectedItem == null)
+            if (dgTramites.SelectedItem is Tramite seleccionado)
             {
-                MessageBox.Show("Seleccione un trámite para modificar.", "Atención", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
+                if (string.IsNullOrWhiteSpace(txtDescripcion.Text) || dpFecha.SelectedDate == null || string.IsNullOrWhiteSpace(txtResponsable.Text))
+                {
+                    MessageBox.Show("Complete todos los campos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                seleccionado.Descripcion = txtDescripcion.Text;
+                seleccionado.Fecha = dpFecha.SelectedDate.Value;
+                seleccionado.Responsable = txtResponsable.Text;
+
+                dgTramites.Items.Refresh();
+                LimpiarCampos();
             }
-
-            if (!ValidarCampos(out string desc, out DateTime fecha, out string resp))
-                return;
-
-            Tramite seleccionado = (Tramite)dgTramites.SelectedItem;
-            seleccionado.Descripcion = desc;
-            seleccionado.Fecha = fecha;
-            seleccionado.Responsable = resp;
-
-            ActualizarGrid();
-            LimpiarCampos();
-
-            MessageBox.Show("Trámite modificado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                MessageBox.Show("Seleccione un trámite para modificar.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
-        private void btnEliminarTramite_Click(object sender, RoutedEventArgs e)
+        private void btnEliminarTramite_Click_1(object sender, RoutedEventArgs e)
         {
-            if (dgTramites.SelectedItem == null)
-            {
-                MessageBox.Show("Seleccione un trámite para eliminar.", "Atención", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
-
-            Tramite seleccionado = (Tramite)dgTramites.SelectedItem;
-
-            var resultado = MessageBox.Show($"¿Desea eliminar el trámite '{seleccionado.Descripcion}'?", "Confirmar eliminación", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (resultado == MessageBoxResult.Yes)
+            if (dgTramites.SelectedItem is Tramite seleccionado)
             {
                 listaTramites.Remove(seleccionado);
-                ActualizarGrid();
-                LimpiarCampos();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un trámite para eliminar.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        private void GuardarDatos()
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(rutaArchivo, false))
+                {
+                    foreach (var t in listaTramites)
+                    {
+                        sw.WriteLine($"{t.IdTramite}|{t.Descripcion}|{t.Fecha:yyyy-MM-dd}|{t.Responsable}");
+                    }
+                }
+                MessageBox.Show("Datos guardados correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar los datos: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void dgTramites_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CargarDatos()
         {
-            if (dgTramites.SelectedItem == null)
+            if (!File.Exists(rutaArchivo)) return;
+
+            try
             {
-                LimpiarCampos();
-                return;
+                string[] lineas = File.ReadAllLines(rutaArchivo);
+                foreach (var linea in lineas)
+                {
+                    var partes = linea.Split('|');
+                    if (partes.Length == 4)
+                    {
+                        Tramite t = new Tramite
+                        {
+                            IdTramite = int.Parse(partes[0]),
+                            Descripcion = partes[1],
+                            Fecha = DateTime.Parse(partes[2]),
+                            Responsable = partes[3]
+                        };
+                        listaTramites.Add(t);
+                        contadorID = Math.Max(contadorID, t.IdTramite + 1);
+                    }
+                }
             }
-
-            Tramite seleccionado = (Tramite)dgTramites.SelectedItem;
-            txtDescripcion.Text = seleccionado.Descripcion;
-            dpFecha.SelectedDate = seleccionado.Fecha;
-            txtResponsable.Text = seleccionado.Responsable;
-        }
-
-        private bool ValidarCampos(out string descripcion, out DateTime fecha, out string responsable)
-        {
-            descripcion = txtDescripcion.Text.Trim();
-            responsable = txtResponsable.Text.Trim();
-            fecha = dpFecha.SelectedDate ?? DateTime.Now;
-
-            if (string.IsNullOrWhiteSpace(descripcion) || descripcion.Length < 3)
+            catch (Exception ex)
             {
-                MessageBox.Show("Ingrese una descripción válida (mínimo 3 caracteres).", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
+                MessageBox.Show("Error al cargar los datos: " + ex.Message);
             }
-
-            if (string.IsNullOrWhiteSpace(responsable) || responsable.Length < 3)
-            {
-                MessageBox.Show("Ingrese un responsable válido (mínimo 3 caracteres).", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
-            if (fecha > DateTime.Now.AddYears(1) || fecha < DateTime.Now.AddYears(-1))
-            {
-                MessageBox.Show("Ingrese una fecha válida (dentro de un año de diferencia).", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
-            return true;
         }
 
         private void LimpiarCampos()
         {
-            txtDescripcion.Clear();
-            txtResponsable.Clear();
-            dpFecha.SelectedDate = DateTime.Now;
-            dgTramites.SelectedItem = null;
+            txtDescripcion.Text = "";
+            dpFecha.SelectedDate = null;
+            txtResponsable.Text = "";
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            GuardarDatos();
+        }
+
+        private void btnVolver_Click(object sender, RoutedEventArgs e)
+        {
+            AccesoATodo acc = new AccesoATodo();
+            acc.Show();
+            this.Close();
         }
     }
 }
